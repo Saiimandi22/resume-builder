@@ -1,22 +1,23 @@
 # Resume Fine-Tuner
 
-An AI-powered resume fine-tuning application that helps job seekers tailor their resumes to specific job descriptions using Claude AI.
+An AI-powered resume fine-tuning application that helps job seekers tailor their resumes to specific job descriptions using Claude AI or Google Gemini.
 
 ## Features
 
 - 🎯 **Resume Upload**: Enter your resume information through a user-friendly form
 - 📝 **Job Description Parsing**: Paste any job description
-- 🤖 **AI-Powered Fine-tuning**: Uses Claude 3.5 Sonnet to intelligently rewrite your resume to match job requirements
+- 🤖 **AI-Powered Fine-tuning**: Uses Claude 3.5 Sonnet or Google Gemini to intelligently rewrite your resume to match job requirements
 - 👀 **Side-by-Side Comparison**: View original and fine-tuned versions side-by-side
 - 📊 **Multiple View Modes**: Compare, view original, or view fine-tuned resume
 - 🖨️ **Print Support**: Print your results for easy sharing
+- 🔄 **Multiple LLM Providers**: Choose between Claude (high quality) or Google Gemini (free & fast)
 
 ## Tech Stack
 
 ### Backend
 - **Runtime**: Node.js
 - **Framework**: Express.js
-- **AI**: Claude API (Anthropic)
+- **AI**: Claude API (Anthropic) or Google Gemini API
 - **Data Storage**: JSON files
 
 ### Frontend
@@ -29,7 +30,8 @@ An AI-powered resume fine-tuning application that helps job seekers tailor their
 
 ### Prerequisites
 - Node.js 16+ and npm
-- Anthropic API key (get one at https://console.anthropic.com)
+- **Option A**: Google API key (free! Get at https://aistudio.google.com/app/apikey)
+- **Option B**: Anthropic API key (get one at https://console.anthropic.com)
 
 ### Setup
 
@@ -44,7 +46,9 @@ cd ..
 2. Configure environment:
 ```bash
 cp .env.example .env
-# Edit .env and add your ANTHROPIC_API_KEY
+# Edit .env and add your API key
+# For Google Gemini (recommended): GOOGLE_API_KEY=...
+# For Claude: ANTHROPIC_API_KEY=...
 ```
 
 3. Run the application:
@@ -60,6 +64,23 @@ npm run client
 ```
 
 4. Open http://localhost:3000 in your browser
+
+## 📚 Setup Guides
+
+Choose your preferred LLM provider and follow the guide that works best for you:
+
+### Google Gemini (Recommended - Free & Fast ⚡)
+- **[QUICK_SETUP.txt](./QUICK_SETUP.txt)** - 60-second setup reference
+- **[GET_GOOGLE_API_KEY.md](./GET_GOOGLE_API_KEY.md)** - Detailed 5-minute walkthrough with screenshots
+- **[GOOGLE_API_KEY_VISUAL.txt](./GOOGLE_API_KEY_VISUAL.txt)** - ASCII visual guide
+
+### Claude (High Quality ✨)
+- See [LLM_PROVIDERS.md](./LLM_PROVIDERS.md) for Claude setup
+- Full comparison between Claude and Google Gemini
+
+### Documentation
+- **[LLM_PROVIDERS.md](./LLM_PROVIDERS.md)** - Complete provider comparison, features, and troubleshooting
+- **[QUICKSTART.md](./QUICKSTART.md)** - Original 5-minute quick start guide
 
 ## Usage
 
@@ -115,10 +136,19 @@ This runs a comprehensive test suite validating all major features.
 ## Environment Variables
 
 ```env
-ANTHROPIC_API_KEY=your_key_here
+# Choose ONE LLM provider:
+ANTHROPIC_API_KEY=your_claude_key_here    # For Claude
+GOOGLE_API_KEY=your_gemini_key_here       # For Google Gemini (free!)
+
+# Select which provider to use:
+LLM_PROVIDER=google    # or "claude"
+
+# Server config:
 PORT=5000
 NODE_ENV=development
 ```
+
+For detailed setup instructions, see [LLM_PROVIDERS.md](./LLM_PROVIDERS.md).
 
 ## How It Works
 
