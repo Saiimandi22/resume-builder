@@ -1,0 +1,259 @@
+.form-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.form-container h2 {
+  color: #667eea;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.resume-form,
+.job-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #e0e0e0;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Results Display */
+.results-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.results-container h2 {
+  color: #667eea;
+  margin-bottom: 1.5rem;
+}
+
+.view-mode-selector {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.mode-btn {
+  padding: 0.5rem 1rem;
+  border: 2px solid #e0e0e0;
+  background: white;
+  color: #333;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.mode-btn.active {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+.mode-btn:hover {
+  border-color: #667eea;
+}
+
+.split-view {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.resume-panel {
+  border: 2px solid #e0e0e0;
+  padding: 1.5rem;
+  border-radius: 4px;
+  background: #fafafa;
+  overflow-y: auto;
+  max-height: 600px;
+}
+
+.resume-panel.full-width {
+  grid-column: 1 / -1;
+  max-height: none;
+}
+
+.panel-title {
+  color: #667eea;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 0.5rem;
+}
+
+.resume-content h3 {
+  color: #333;
+  margin: 1rem 0 0.5rem 0;
+  font-size: 1.3rem;
+}
+
+.resume-content h4 {
+  color: #667eea;
+  margin: 1rem 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.resume-content section {
+  margin-bottom: 1rem;
+}
+
+.resume-content p {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.contact-info {
+  color: #667eea;
+  font-weight: 500;
+}
+
+.job-description-section {
+  margin: 2rem 0;
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 4px;
+  border-left: 4px solid #667eea;
+}
+
+.job-description-section h3 {
+  color: #667eea;
+  margin-bottom: 1rem;
+}
+
+.job-description-content {
+  color: #666;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .split-view {
+    grid-template-columns: 1fr;
+  }
+
+  .form-container,
+  .results-container {
+    padding: 1rem;
+  }
+
+  .form-container h2,
+  .results-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .view-mode-selector {
+    flex-direction: column;
+  }
+
+  .mode-btn {
+    width: 100%;
+  }
+
+  .resume-panel {
+    max-height: none;
+  }
+}
+
+@media print {
+  .app-header,
+  .view-mode-selector,
+  .actions {
+    display: none;
+  }
+
+  .split-view {
+    page-break-inside: avoid;
+  }
+
+  .resume-panel {
+    page-break-inside: avoid;
+    border: none;
+    box-shadow: none;
+  }
+}
