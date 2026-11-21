@@ -1,0 +1,85 @@
+# 🚀 QUICK REFERENCE - Google API Key Setup
+
+## **In 60 Seconds:**
+
+### 1️⃣ Get Your Key (2 minutes)
+```
+👉 Go to: https://aistudio.google.com/app/apikey
+👉 Sign in with Google
+👉 Click "Create API Key"
+👉 Click "Copy" on your key
+```
+
+### 2️⃣ Add to Project (1 minute)
+```bash
+# Edit your .env file and add:
+GOOGLE_API_KEY=AIzaSyD_...paste-your-key-here...
+LLM_PROVIDER=google
+```
+
+### 3️⃣ Restart Server (1 minute)
+```bash
+# Stop server (Ctrl+C if running)
+npm run dev
+# See: "LLM Provider: google" ✅
+```
+
+### 4️⃣ Use It! (1 minute)
+```
+Open: http://localhost:3000
+Enter resume → Paste job → Click "Fine-tune"
+Done! 🎉
+```
+
+---
+
+## 📋 Your Key Looks Like This:
+```
+AIzaSyD_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+↑
+Starts with "AIzaSyD_"
+Looks like a long random string
+```
+
+---
+
+## ✅ Your .env File Should Be:
+```env
+GOOGLE_API_KEY=AIzaSyD_...your-actual-key...
+LLM_PROVIDER=google
+PORT=5000
+NODE_ENV=development
+```
+
+---
+
+## ✨ That's It!
+- ✅ No credit card
+- ✅ Completely free
+- ✅ Super fast
+- ✅ Ready to use
+
+**Questions?** See these guides:
+- 📖 `GET_GOOGLE_API_KEY.md` - Detailed steps
+- 📋 `GOOGLE_API_KEY_VISUAL.txt` - ASCII walkthrough
+- 📚 `LLM_PROVIDERS.md` - Full documentation
+
+---
+
+## 🆘 If It Doesn't Work:
+
+| Issue | Fix |
+|-------|-----|
+| "Key not found" | Restart server after adding .env |
+| "Invalid key" | Copy ENTIRE key with no spaces |
+| "Quota exceeded" | Wait 1 minute (free tier limit) |
+| "GenAI undefined" | Run `npm install @google/generative-ai` |
+
+---
+
+**🎯 Ready? Let's go!**
+
+```bash
+npm run dev
+# Then go to http://localhost:3000
+```
