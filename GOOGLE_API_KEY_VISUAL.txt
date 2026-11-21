@@ -1,0 +1,234 @@
+📋 GOOGLE API KEY - VISUAL WALKTHROUGH
+=====================================
+
+This shows exactly what to look for at each step.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 1: OPEN THE WEBSITE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Go to: https://aistudio.google.com/app/apikey
+
+You'll see:
+┌─────────────────────────────────────────┐
+│  🔍 Google AI Studio                    │
+│                                         │
+│  💡 Get Started with the Gemini API    │
+│                                         │
+│  [Sign in with Google] 🔵              │
+│                                         │
+└─────────────────────────────────────────┘
+
+👆 Click "Sign in with Google"
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 2: SIGN IN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+A Google login form appears:
+┌─────────────────────────────────────┐
+│  Sign in                            │
+│                                     │
+│  📧 Email: [your@gmail.com]        │
+│                                     │
+│  [Next]                            │
+│                                     │
+│  Don't have an account?            │
+│  [Create one]                      │
+└─────────────────────────────────────┘
+
+Enter your Gmail address and password, then click "Next"
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 3: YOU'RE LOGGED IN!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+You'll see the API Keys page:
+
+┌─────────────────────────────────────────────────┐
+│  🔑 API Keys                                    │
+│                                                 │
+│  Manage your API keys for Gemini               │
+│                                                 │
+│  ┌─────────────────────────────────────────┐  │
+│  │  [+ Create API Key]                     │  │
+│  │  or                                      │  │
+│  │  [+ Get API Key]                        │  │
+│  │  🔵 (This is a blue button!)            │  │
+│  └─────────────────────────────────────────┘  │
+│                                                 │
+└─────────────────────────────────────────────────┘
+
+👆 Click the blue "Create API Key" or "Get API Key" button
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 4: CHOOSE PROJECT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+A popup appears:
+
+┌──────────────────────────────────────────┐
+│  Create API key                          │
+│                                          │
+│  Where do you want to create your key?  │
+│                                          │
+│  ◉ Create API key in new project ✅     │
+│    (Recommended for beginners)           │
+│                                          │
+│  ◯ Create API key in existing project   │
+│    (If you have another project)        │
+│                                          │
+│  [Create API Key]                       │
+│                                          │
+└──────────────────────────────────────────┘
+
+👆 Select "Create API key in new project" (should be pre-selected)
+👆 Then click "Create API Key"
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 5: COPY YOUR KEY!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Your API key appears instantly!
+
+┌─────────────────────────────────────────────────┐
+│  API Key created successfully!                  │
+│                                                 │
+│  Your API Key:                                  │
+│  ┌────────────────────────────────────────────┐│
+│  │AIzaSyD_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ││
+│  │                        [📋 Copy]            ││
+│  └────────────────────────────────────────────┘│
+│                                                 │
+│  ⚠️ IMPORTANT:                                 │
+│  🔐 Keep this secret!                         │
+│  👁️  You'll only see it once!                 │
+│  📋 Click Copy to save it                     │
+│                                                 │
+│  [Close]                                       │
+└─────────────────────────────────────────────────┘
+
+👆 Click the [📋 Copy] button
+   (Your key is now in your clipboard!)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 6: ADD TO YOUR PROJECT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Go to your project folder and open the .env file:
+
+Your .env file should look like:
+
+┌──────────────────────────────────────────┐
+│ ANTHROPIC_API_KEY=your_anthropic_key    │
+│ GOOGLE_API_KEY=your_google_key_here     │
+│ LLM_PROVIDER=claude                      │
+│ PORT=5000                                │
+│ NODE_ENV=development                     │
+└──────────────────────────────────────────┘
+
+CHANGE IT TO:
+
+┌──────────────────────────────────────────┐
+│ ANTHROPIC_API_KEY=your_anthropic_key    │
+│ GOOGLE_API_KEY=AIzaSyD_xxx... (paste)   │👈 Paste your key here
+│ LLM_PROVIDER=google                      │👈 Change to 'google'
+│ PORT=5000                                │
+│ NODE_ENV=development                     │
+└──────────────────────────────────────────┘
+
+Replace "AIzaSyD_xxx..." with your ACTUAL key (the one you copied!)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 7: SAVE AND RESTART
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Save your .env file
+   - If using nano: Press Ctrl+O, then Enter, then Ctrl+X
+   - If using VS Code: Press Ctrl+S
+
+2. Stop the server if it's running
+   - Press Ctrl+C
+
+3. Restart the server
+   - Type: npm run dev
+   - You should see: "LLM Provider: google" ✅
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 8: TEST IT!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Open your browser: http://localhost:3000
+2. Fill in your resume information
+3. Paste a job description
+4. Click "Fine-tune My Resume"
+5. Wait 2-3 seconds for results! ✅
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✨ YOU'RE DONE! 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+You now have:
+✅ Google Gemini API working
+✅ Free resume fine-tuning
+✅ Super fast processing (2-3 seconds)
+✅ No credit card needed
+✅ Unlimited usage on free tier (up to 15 requests/min)
+
+Enjoy! 🚀
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❓ TROUBLESHOOTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Problem: "Cannot find GOOGLE_API_KEY"
+Solution: 
+  1. Make sure .env file exists in your project root
+  2. Make sure you pasted the ENTIRE key
+  3. Restart the server
+
+Problem: "API key is invalid"
+Solution:
+  1. Get a new key from https://aistudio.google.com/app/apikey
+  2. Make sure you copied it correctly
+  3. No extra spaces before or after
+
+Problem: "API quota exceeded"
+Solution:
+  1. Google free tier: 15 requests per minute
+  2. Wait 1 minute and try again
+  3. Or upgrade to paid plan
+
+Problem: "GenAI is not defined"
+Solution:
+  1. Run: npm install @google/generative-ai
+  2. Restart the server
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📞 NEED HELP?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Check these files in your project:
+- LLM_PROVIDERS.md (Complete guide)
+- GET_GOOGLE_API_KEY.md (This file)
+- README.md (Full documentation)
