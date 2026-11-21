@@ -22,7 +22,17 @@ app.use('/api/resume', resumeRoutes);
 app.use('/api/jobs', jobRoutes);
 
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok' });
+  res.json({ 
+    status: 'ok',
+    llmProvider: process.env.LLM_PROVIDER || 'claude',
+  });
+});
+
+app.get('/api/config', (req, res) => {
+  res.json({
+    llmProvider: process.env.LLM_PROVIDER || 'claude',
+    supportedProviders: ['claude', 'google'],
+  });
 });
 
 // Fallback to index.html for SPA routing
@@ -32,4 +42,5 @@ app.get('*', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`LLM Provider: ${process.env.LLM_PROVIDER || 'claude'}`);
 });

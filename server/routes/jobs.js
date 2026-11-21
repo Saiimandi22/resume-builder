@@ -1,6 +1,6 @@
 import express from 'express';
 import crypto from 'crypto';
-import { fineTuneResume, analyzeJobDescription } from '../services/claudeService.js';
+import { fineTuneResume, analyzeJobDescription, getLLMProvider } from '../services/llmService.js';
 import { saveJobApplication, getJobApplication } from '../services/storageService.js';
 
 const router = express.Router();
@@ -22,6 +22,7 @@ router.post('/fine-tune', async (req, res) => {
       originalResume: resume,
       fineTunedResume,
       jobDescription,
+      llmProvider: getLLMProvider(),
     };
 
     saveJobApplication(applicationId, applicationData);
@@ -31,6 +32,7 @@ router.post('/fine-tune', async (req, res) => {
       applicationId,
       originalResume: resume,
       fineTunedResume,
+      llmProvider: getLLMProvider(),
     });
   } catch (error) {
     console.error('Error fine-tuning resume:', error);
@@ -51,6 +53,7 @@ router.post('/analyze', async (req, res) => {
     res.json({
       success: true,
       analysis,
+      llmProvider: getLLMProvider(),
     });
   } catch (error) {
     console.error('Error analyzing job description:', error);
@@ -70,6 +73,12 @@ router.get('/application/:id', (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+});
+
+router.get('/provider', (req, res) => {
+  res.json({
+    provider: getLLMProvider(),
+  });
 });
 
 export default router;
