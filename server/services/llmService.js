@@ -1,10 +1,23 @@
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import Anthropic from '@anthropic-ai/sdk';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load .env from project root
+dotenv.config({ path: path.join(__dirname, '../../.env') });
 
 const anthropicClient = new Anthropic();
 const googleClient = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 
 const LLM_PROVIDER = process.env.LLM_PROVIDER || 'claude';
+
+console.log('LLM Service loaded. Provider:', LLM_PROVIDER);
+console.log('Google API Key present:', !!process.env.GOOGLE_API_KEY);
+console.log('Anthropic API Key present:', !!process.env.ANTHROPIC_API_KEY);
 
 // Claude fine-tuning
 async function fineTuneWithClaude(resume, jobDescription) {
@@ -75,7 +88,7 @@ ${jobDescription}
 Return the fine-tuned resume in the same JSON format as the input, with refined content.`;
 
   try {
-    const model = googleClient.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = googleClient.getGenerativeModel({ model: 'gemini-3.8-flash' });
     const result = await model.generateContent(prompt);
     const responseText = result.response.text();
     
@@ -139,7 +152,7 @@ ${jobDescription}
 Provide a structured analysis.`;
 
   try {
-    const model = googleClient.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = googleClient.getGenerativeModel({ model: 'gemini-3.8-flash' });
     const result = await model.generateContent(prompt);
     return result.response.text();
   } catch (error) {

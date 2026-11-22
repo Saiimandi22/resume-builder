@@ -6,10 +6,11 @@ import { fileURLToPath } from 'url';
 import resumeRoutes from './routes/resume.js';
 import jobRoutes from './routes/jobs.js';
 
-dotenv.config();
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Load .env from parent directory
+dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const app = express();
 const PORT = process.env.PORT || 5000;
