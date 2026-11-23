@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import '../styles/components.css';
 
 export default function ResumeForm({ onSubmit }) {
@@ -11,10 +12,40 @@ export default function ResumeForm({ onSubmit }) {
     experience: '',
     education: '',
   });
+  const [loading, setLoading] = useState(false);
+  const [uploadMethod, setUploadMethod] = useState('manual'); // 'manual' or 'file'
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setLoading(true);
+    const formDataFile = new FormData();
+    formDataFile.append('file', file);
+
+    try {
+      const response = await axios.post('/api/resume/parse', formDataFile, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+
+      if (response.data.success) {
+        setFormData((prev) => ({
+          ...prev,
+          ...response.data.parsedData,
+        }));
+        setUploadMethod('manual');
+        alert('File uploaded and parsed successfully!');
+      }
+    } catch (error) {
+      alert(`Error uploading file: ${error.response?.data?.error || error.message}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -31,7 +62,51 @@ export default function ResumeForm({ onSubmit }) {
   return (
     <div className="form-container">
       <h2>Step 1: Your Resume</h2>
-      <form onSubmit={handleSubmit} className="resume-form">
+      
+      {/* Upload Method Selector */}
+      <div className="upload-method-selector">
+        <label>How would you like to provide your resume?</label>
+        <div className="method-buttons">
+          <button
+            type="button"
+            className={`method-btn ${uploadMethod === 'file' ? 'active' : ''}`}
+            onClick={() => setUploadMethod('file')}
+          >
+            📁 Upload File (PDF, Word, Text)
+          </button>
+          <button
+            type="button"
+            className={`method-btn ${uploadMethod === 'manual' ? 'active' : ''}`}
+            onClick={() => setUploadMethod('manual')}
+          >
+            ✏️ Type Manually
+          </button>
+        </div>
+      </div>
+
+      {/* File Upload Section */}
+      {uploadMethod === 'file' && (
+        <div className="file-upload-section">
+          <div className="file-input-wrapper">
+            <label htmlFor="resumeFile" className="file-label">
+              {loading ? '⏳ Processing file...' : '📄 Choose Resume File'}
+            </label>
+            <input
+              id="resumeFile"
+              type="file"
+              accept=".pdf,.doc,.docx,.txt"
+              onChange={handleFileUpload}
+              disabled={loading}
+              className="file-input"
+            />
+            <p className="file-help">Supported: PDF, Word (.doc, .docx), Plain Text</p>
+          </div>
+        </div>
+      )}
+
+      {/* Manual Entry Form */}
+      {uploadMethod === 'manual' && (
+        <form onSubmit={handleSubmit} className="resume-form">
         <div className="form-group">
           <label htmlFor="fullName">Full Name *</label>
           <input
@@ -122,6 +197,7 @@ export default function ResumeForm({ onSubmit }) {
           Next: Add Job Description
         </button>
       </form>
+      )}
     </div>
   );
 }

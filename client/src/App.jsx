@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import ResumeUpload from './components/ResumeUpload';
 import ResumeForm from './components/ResumeForm';
 import JobDescriptionForm from './components/JobDescriptionForm';
 import ResultsDisplay from './components/ResultsDisplay';
@@ -11,10 +12,36 @@ function App() {
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [step, setStep] = useState('resume'); // 'resume', 'job', 'results'
+  const [step, setStep] = useState('upload'); // 'upload', 'resume', 'job', 'results'
 
-  const handleResumeSubmit = (resumeData) => {
-    setResume(resumeData);
+  const handleResumeUpload = (resumeData) => {
+    // Parse resume data into the format we need
+    const formattedResume = {
+      name: resumeData.fullName || 'Your Name',
+      email: resumeData.email || 'email@example.com',
+      phone: resumeData.phone || '',
+      summary: resumeData.summary || '',
+      skills: resumeData.skills || '',
+      experience: resumeData.experience || '',
+      education: resumeData.education || '',
+    };
+    setResume(formattedResume);
+    setStep('job');
+    setError(null);
+  };
+
+  const handleResumeFormSubmit = (resumeData) => {
+    // Convert form data to expected format
+    const formattedResume = {
+      name: resumeData.fullName,
+      email: resumeData.email,
+      phone: resumeData.phone || '',
+      summary: resumeData.summary,
+      skills: resumeData.skills,
+      experience: resumeData.experience,
+      education: resumeData.education,
+    };
+    setResume(formattedResume);
     setStep('job');
     setError(null);
   };
@@ -45,7 +72,13 @@ function App() {
     setJobDescription('');
     setResults(null);
     setError(null);
-    setStep('resume');
+    setStep('upload');
+  };
+
+  const handleBackToUpload = () => {
+    setResume(null);
+    setStep('upload');
+    setError(null);
   };
 
   return (
@@ -58,13 +91,22 @@ function App() {
       <main className="app-main">
         {error && <div className="error-message">{error}</div>}
 
-        {step === 'resume' && <ResumeForm onSubmit={handleResumeSubmit} />}
+        {step === 'upload' && (
+          <ResumeUpload
+            onSubmit={handleResumeUpload}
+            onSkip={() => setStep('resume')}
+          />
+        )}
+
+        {step === 'resume' && (
+          <ResumeForm onSubmit={handleResumeFormSubmit} />
+        )}
 
         {step === 'job' && (
           <JobDescriptionForm
             onSubmit={handleJobSubmit}
             loading={loading}
-            onBack={() => setStep('resume')}
+            onBack={handleBackToUpload}
           />
         )}
 
