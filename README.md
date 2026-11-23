@@ -18,6 +18,8 @@ An AI-powered resume fine-tuning application that helps job seekers tailor their
 - **Runtime**: Node.js
 - **Framework**: Express.js
 - **AI**: Claude API (Anthropic) or Google Gemini API
+- **File Parsing**: pdf-parse (PDF), mammoth (Word), native (Text)
+- **File Upload**: Multer
 - **Data Storage**: JSON files
 
 ### Frontend
@@ -84,11 +86,44 @@ Choose your preferred LLM provider and follow the guide that works best for you:
 
 ## Usage
 
-1. Enter your resume details (name, email, experience, skills, education)
-2. Paste the job description you're applying for
-3. Get AI-powered resume fine-tuning results
+1. **Choose Input Method**:
+   - **📁 Upload File**: Upload your resume as PDF, Word (.docx), or Text file
+   - **✏️ Type Manually**: Enter resume details manually in the form
+
+2. If uploading a file:
+   - Supported formats: PDF, Word (.docx, .doc), Plain Text
+   - Maximum file size: 10MB
+   - The app automatically extracts: name, email, phone, skills, experience, education
+
+3. Enter job description and get AI-powered resume fine-tuning
 4. View side-by-side comparison of original vs. fine-tuned resume
 5. Print or start a new application
+
+## File Upload Feature
+
+### Supported Formats
+- **PDF** - Professional resume PDFs
+- **Word** - Microsoft Word documents (.docx, .doc)
+- **Plain Text** - Simple text files (.txt)
+
+### How It Works
+1. Click "📁 Upload File" on the resume form
+2. Select your resume file (PDF, Word, or Text)
+3. The application automatically:
+   - Parses the file content
+   - Extracts resume sections (name, email, phone, skills, experience, education)
+   - Populates the form with extracted data
+4. Review and edit the extracted information if needed
+5. Click "Next: Add Job Description" to continue
+
+### Technical Details
+- File uploads are processed server-side using Node.js
+- PDF parsing: `pdf-parse` library
+- Word document parsing: `mammoth` library
+- Text files parsed directly
+- Uploaded files are automatically deleted after processing for privacy
+- Maximum file size: 10MB
+- All extraction happens locally on your server
 
 ## Project Structure
 
@@ -97,22 +132,31 @@ resume-builder/
 ├── server/                      # Backend (Node.js/Express)
 │   ├── index.js
 │   ├── services/
+│   │   ├── fileParserService.js# File upload and parsing
+│   │   ├── llmService.js       # LLM provider routing
 │   │   ├── claudeService.js    # Claude AI integration
 │   │   └── storageService.js   # File storage
 │   └── routes/
 │       ├── jobs.js             # Fine-tuning endpoints
-│       └── resume.js           # Resume management
+│       └── resume.js           # Resume management + file parsing
 ├── client/                      # Frontend (React/Vite)
 │   ├── src/
 │   │   ├── components/         # React components
 │   │   └── styles/             # CSS files
 │   └── vite.config.js
 ├── data/                        # Stored data (auto-created)
+│   └── uploads/               # Temporary uploaded files (auto-cleaned)
 ├── test-api.js                  # API test script
 └── README.md
 ```
 
 ## API Endpoints
+
+### File Upload
+- `POST /api/resume/parse` - Parse and extract resume from uploaded file
+  - Accepts: PDF, Word (.doc, .docx), Plain Text
+  - Returns: Extracted resume fields (name, email, phone, skills, experience, education)
+  - Max file size: 10MB
 
 ### Fine-tune Resume
 - `POST /api/jobs/fine-tune` - Analyze job description and fine-tune resume
