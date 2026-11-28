@@ -28,7 +28,15 @@ An AI-powered resume fine-tuning application that helps job seekers tailor their
 - **HTTP Client**: Axios
 - **Styling**: CSS3
 
-## Quick Start
+## 🚀 Deploy to Production
+
+**Automatic GitHub Deployment** - Your code deploys to production instantly when you push to GitHub!
+
+👉 **[See PRODUCTION_DEPLOYMENT.md for step-by-step setup](./PRODUCTION_DEPLOYMENT.md)**
+
+After setup, every `git push` triggers automatic deployment to Vercel. No manual steps needed.
+
+## Quick Start (Local Development)
 
 ### Prerequisites
 - Node.js 16+ and npm
